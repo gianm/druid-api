@@ -65,6 +65,12 @@ public class NoneShardSpec implements ShardSpec
   }
 
   @Override
+  public ShardSpec nextShardSpec()
+  {
+    return null;
+  }
+
+  @Override
   public boolean equals(Object obj)
   {
     return obj instanceof NoneShardSpec;

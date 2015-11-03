@@ -30,8 +30,8 @@ import java.util.List;
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 @JsonSubTypes({
-                  @JsonSubTypes.Type(name = "none", value = NoneShardSpec.class),
-              })
+    @JsonSubTypes.Type(name = "none", value = NoneShardSpec.class),
+})
 public interface ShardSpec
 {
   public <T> PartitionChunk<T> createChunk(T obj);
@@ -41,4 +41,10 @@ public interface ShardSpec
   public int getPartitionNum();
 
   public ShardSpecLookup getLookup(List<ShardSpec> shardSpecs);
+
+  /**
+   * If this ShardSpec is part of a set that allows for after-the-fact additions, returns the ShardSpec that should
+   * be used for expansion. Otherwise, returns null.
+   */
+  public ShardSpec nextShardSpec();
 }
